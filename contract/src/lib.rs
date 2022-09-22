@@ -6,15 +6,16 @@ use near_sdk::collections::{LookupMap, TreeMap};
 use near_sdk::serde::Serialize;
 use near_sdk::{env, near_bindgen, AccountId, Balance, Promise};
 use near_sdk::{log, PromiseOrValue};
+use schemars::JsonSchema;
 use serde::Deserialize;
 
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Debug, PartialEq)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, Debug, PartialEq, JsonSchema)]
 pub struct Winner {
     owner: AccountId,
     amount: Balance,
 }
 
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Debug, PartialEq)]
+#[derive(BorshDeserialize, BorshSerialize, Serialize, Debug, PartialEq, JsonSchema)]
 pub struct SlotInfo {
     metadata: String,
     winner: Option<Winner>,
@@ -29,25 +30,25 @@ pub struct Reservations {
 impl Default for Reservations {
     fn default() -> Self {
         Self {
-            slots: LookupMap::new(b"r".to_vec()),
+            slots: LookupMap::new(b"r"),
         }
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, JsonSchema)]
 #[serde(crate = "near_sdk::serde")]
 pub struct Web4Request {
     #[serde(rename = "accountId")]
-    pub account_id: Option<String>,
-    pub path: String,
+    _account_id: Option<String>,
+    path: String,
     #[serde(default)]
-    pub params: std::collections::HashMap<String, String>,
+    params: std::collections::HashMap<String, String>,
     #[serde(default)]
-    pub query: std::collections::HashMap<String, Vec<String>>,
-    pub preloads: Option<std::collections::HashMap<String, Web4Response>>,
+    query: std::collections::HashMap<String, Vec<String>>,
+    preloads: Option<std::collections::HashMap<String, Web4Response>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, JsonSchema)]
 #[serde(crate = "near_sdk::serde", untagged)]
 pub enum Web4Response {
     Body {

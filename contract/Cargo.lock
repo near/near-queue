@@ -333,6 +333,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "dyn-clone"
+version = "1.0.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4f94fa09c2aeea5b8839e414b7b841bf429fd25b9c522116ac97ee87856d88b2"
+
+[[package]]
 name = "easy-ext"
 version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -507,6 +513,7 @@ name = "loadtest-contract"
 version = "0.1.0"
 dependencies = [
  "near-sdk",
+ "schemars",
  "serde",
  "serde_json",
 ]
@@ -525,6 +532,18 @@ name = "memory_units"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8452105ba047068f40ff7093dd1d9da90898e63dd61736462e9cdda6a90ad3c3"
+
+[[package]]
+name = "near-abi"
+version = "0.1.0-pre.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d5281adc3a63d798b0e35683dee66095cbb94e431960ec859d5a8397b093f39"
+dependencies = [
+ "borsh",
+ "schemars",
+ "semver",
+ "serde",
+]
 
 [[package]]
 name = "near-account-id"
@@ -639,6 +658,7 @@ dependencies = [
  "base64 0.13.0",
  "borsh",
  "bs58",
+ "near-abi",
  "near-crypto",
  "near-primitives",
  "near-primitives-core",
@@ -646,6 +666,7 @@ dependencies = [
  "near-sys",
  "near-vm-logic",
  "once_cell",
+ "schemars",
  "serde",
  "serde_json",
  "wee_alloc",
@@ -974,6 +995,30 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73b4b750c782965c211b42f022f59af1fbceabdd026623714f104152f1ec149f"
 
 [[package]]
+name = "schemars"
+version = "0.8.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1847b767a3d62d95cbf3d8a9f0e421cf57a0d8aa4f411d4b16525afb0284d4ed"
+dependencies = [
+ "dyn-clone",
+ "schemars_derive",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "schemars_derive"
+version = "0.8.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "af4d7e1b012cb3d9129567661a63755ea4b8a7386d339dc945ae187e403c6743"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "serde_derive_internals",
+ "syn",
+]
+
+[[package]]
 name = "semver"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -993,6 +1038,17 @@ name = "serde_derive"
 version = "1.0.118"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c84d3526699cd55261af4b941e4e725444df67aa4f9e6a3564f18030d12672df"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "serde_derive_internals"
+version = "0.26.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "85bf8229e7920a9f636479437026331ce11aa132b4dde37d121944a44d6e5f3c"
 dependencies = [
  "proc-macro2",
  "quote",
